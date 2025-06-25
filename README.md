@@ -37,13 +37,6 @@ Create the perfect cocktail or mocktail for any mood or occasion — powered by 
 - **Backend API**:  
   - AI-powered recipe generation (via Atlassian Rovo Dev Agent)
 
-## 📸 UI Preview
-
-![UI Preview 1](./screenshots/main_1.png)  
-![UI Preview 2](./screenshots/main_2.png)  
-![UI Preview 3](./screenshots/main_3.png)
-![UI Preview 4](./screenshots/main_4.png)
-
 ## 🚀 Getting Started Locally
 
 ```bash
