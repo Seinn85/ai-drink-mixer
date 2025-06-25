@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Drink Mixer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating animated elements -->
+    <div class="floating-ice">🧊</div>
+    <div class="floating-ice">🍋</div>
+    <div class="floating-ice">🍸</div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🍹 AI Drink Mixer</h1>
+            <p>Create the perfect drink for any mood or occasion</p>
+            <div class="header-actions">
+                <button class="header-btn" id="favorites-btn" onclick="drinkMixer.toggleFavorites()">
+                    <span class="btn-icon">❤️</span>
+                    <span class="btn-text">My Favorites</span>
+                    <span class="favorites-count" id="favorites-count">0</span>
+                </button>
+                <button class="header-btn" id="history-btn" onclick="drinkMixer.toggleHistory()">
+                    <span class="btn-icon">📚</span>
+                    <span class="btn-text">Recipe History</span>
+                    <span class="history-count" id="history-count">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="main-content">
+            <!-- Left Section - Input Form -->
+            <div class="input-section">
+                <form id="drink-form">
+                    <!-- Ingredients Selection -->
+                    <div class="form-group">
+                        <label>🥃 Select Ingredients (Choose Multiple)</label>
+                        
+                        <!-- Selected Ingredients Display -->
+                        <div class="selected-ingredients" id="selected-ingredients">
+                            <div class="selected-count">
+                                <span id="ingredient-count">0</span> ingredients selected
+                            </div>
+                            <div class="selected-list" id="selected-list"></div>
+                        </div>
+
+                        <!-- Ingredient Categories -->
+                        <div class="ingredient-categories">
+                            <div class="category-tabs">
+                                <button type="button" class="category-tab active" data-category="spirits">
+                                    🥃 Spirits
+                                </button>
+                                <button type="button" class="category-tab" data-category="mixers">
+                                    🧊 Mixers
+                                </button>
+                                <button type="button" class="category-tab" data-category="fruits">
+                                    🍊 Fruits
+                                </button>
+                                <button type="button" class="category-tab" data-category="herbs">
+                                    🌿 Herbs & Spices
+                                </button>
+                                <button type="button" class="category-tab" data-category="extras">
+                                    ✨ Extras
+                                </button>
+                            </div>
+
+                            <!-- Spirits Category -->
+                            <div class="ingredients-container category-content active" data-category="spirits">
+                                <div class="ingredient-option" data-ingredient="vodka" data-category="spirits">
+                                    <div class="ingredient-icon">🍸</div>
+                                    <div class="ingredient-name">Vodka</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="rum" data-category="spirits">
+                                    <div class="ingredient-icon">🏴‍☠️</div>
+                                    <div class="ingredient-name">Rum</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="gin" data-category="spirits">
+                                    <div class="ingredient-icon">🌲</div>
+                                    <div class="ingredient-name">Gin</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="tequila" data-category="spirits">
+                                    <div class="ingredient-icon">🌵</div>
+                                    <div class="ingredient-name">Tequila</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="whiskey" data-category="spirits">
+                                    <div class="ingredient-icon">🥃</div>
+                                    <div class="ingredient-name">Whiskey</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="brandy" data-category="spirits">
+                                    <div class="ingredient-icon">🍷</div>
+                                    <div class="ingredient-name">Brandy</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="sake" data-category="spirits">
+                                    <div class="ingredient-icon">🍶</div>
+                                    <div class="ingredient-name">Sake</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="champagne" data-category="spirits">
+                                    <div class="ingredient-icon">🍾</div>
+                                    <div class="ingredient-name">Champagne</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                            </div>
+
+                            <!-- Mixers Category -->
+                            <div class="ingredients-container category-content" data-category="mixers">
+                                <div class="ingredient-option" data-ingredient="tonic" data-category="mixers">
+                                    <div class="ingredient-icon">🥤</div>
+                                    <div class="ingredient-name">Tonic Water</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="soda" data-category="mixers">
+                                    <div class="ingredient-icon">💧</div>
+                                    <div class="ingredient-name">Soda Water</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="ginger-beer" data-category="mixers">
+                                    <div class="ingredient-icon">🫚</div>
+                                    <div class="ingredient-name">Ginger Beer</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="cola" data-category="mixers">
+                                    <div class="ingredient-icon">🥤</div>
+                                    <div class="ingredient-name">Cola</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="simple-syrup" data-category="mixers">
+                                    <div class="ingredient-icon">🍯</div>
+                                    <div class="ingredient-name">Simple Syrup</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="grenadine" data-category="mixers">
+                                    <div class="ingredient-icon">🍒</div>
+                                    <div class="ingredient-name">Grenadine</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="triple-sec" data-category="mixers">
+                                    <div class="ingredient-icon">🍊</div>
+                                    <div class="ingredient-name">Triple Sec</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="vermouth" data-category="mixers">
+                                    <div class="ingredient-icon">🍷</div>
+                                    <div class="ingredient-name">Vermouth</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                            </div>
+
+                            <!-- Fruits Category -->
+                            <div class="ingredients-container category-content" data-category="fruits">
+                                <div class="ingredient-option" data-ingredient="lime" data-category="fruits">
+                                    <div class="ingredient-icon">🍋</div>
+                                    <div class="ingredient-name">Lime</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="lemon" data-category="fruits">
+                                    <div class="ingredient-icon">🍋</div>
+                                    <div class="ingredient-name">Lemon</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="orange" data-category="fruits">
+                                    <div class="ingredient-icon">🍊</div>
+                                    <div class="ingredient-name">Orange</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="cranberry" data-category="fruits">
+                                    <div class="ingredient-icon">🫐</div>
+                                    <div class="ingredient-name">Cranberry</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="pineapple" data-category="fruits">
+                                    <div class="ingredient-icon">🍍</div>
+                                    <div class="ingredient-name">Pineapple</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="coconut" data-category="fruits">
+                                    <div class="ingredient-icon">🥥</div>
+                                    <div class="ingredient-name">Coconut</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="apple" data-category="fruits">
+                                    <div class="ingredient-icon">🍎</div>
+                                    <div class="ingredient-name">Apple</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="strawberry" data-category="fruits">
+                                    <div class="ingredient-icon">🍓</div>
+                                    <div class="ingredient-name">Strawberry</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="watermelon" data-category="fruits">
+                                    <div class="ingredient-icon">🍉</div>
+                                    <div class="ingredient-name">Watermelon</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="peach" data-category="fruits">
+                                    <div class="ingredient-icon">🍑</div>
+                                    <div class="ingredient-name">Peach</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                            </div>
+
+                            <!-- Herbs & Spices Category -->
+                            <div class="ingredients-container category-content" data-category="herbs">
+                                <div class="ingredient-option" data-ingredient="mint" data-category="herbs">
+                                    <div class="ingredient-icon">🌿</div>
+                                    <div class="ingredient-name">Mint</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="basil" data-category="herbs">
+                                    <div class="ingredient-icon">🌱</div>
+                                    <div class="ingredient-name">Basil</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="rosemary" data-category="herbs">
+                                    <div class="ingredient-icon">🌿</div>
+                                    <div class="ingredient-name">Rosemary</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="thyme" data-category="herbs">
+                                    <div class="ingredient-icon">🌿</div>
+                                    <div class="ingredient-name">Thyme</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="ginger" data-category="herbs">
+                                    <div class="ingredient-icon">🫚</div>
+                                    <div class="ingredient-name">Ginger</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="cinnamon" data-category="herbs">
+                                    <div class="ingredient-icon">🪵</div>
+                                    <div class="ingredient-name">Cinnamon</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="cardamom" data-category="herbs">
+                                    <div class="ingredient-icon">🌰</div>
+                                    <div class="ingredient-name">Cardamom</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="lavender" data-category="herbs">
+                                    <div class="ingredient-icon">💜</div>
+                                    <div class="ingredient-name">Lavender</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                            </div>
+
+                            <!-- Extras Category -->
+                            <div class="ingredients-container category-content" data-category="extras">
+                                <div class="ingredient-option" data-ingredient="bitters" data-category="extras">
+                                    <div class="ingredient-icon">💧</div>
+                                    <div class="ingredient-name">Bitters</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="egg-white" data-category="extras">
+                                    <div class="ingredient-icon">🥚</div>
+                                    <div class="ingredient-name">Egg White</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="cream" data-category="extras">
+                                    <div class="ingredient-icon">🥛</div>
+                                    <div class="ingredient-name">Cream</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="coffee" data-category="extras">
+                                    <div class="ingredient-icon">☕</div>
+                                    <div class="ingredient-name">Coffee</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="chocolate" data-category="extras">
+                                    <div class="ingredient-icon">🍫</div>
+                                    <div class="ingredient-name">Chocolate</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="vanilla" data-category="extras">
+                                    <div class="ingredient-icon">🌟</div>
+                                    <div class="ingredient-name">Vanilla</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="honey" data-category="extras">
+                                    <div class="ingredient-icon">🍯</div>
+                                    <div class="ingredient-name">Honey</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                                <div class="ingredient-option" data-ingredient="salt" data-category="extras">
+                                    <div class="ingredient-icon">🧂</div>
+                                    <div class="ingredient-name">Salt</div>
+                                    <div class="ingredient-check">✓</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Custom Ingredients Input -->
+                        <div class="custom-ingredients-section">
+                            <input type="text" class="custom-ingredients" id="custom-ingredients" 
+                                   placeholder="Add custom ingredients (e.g., elderflower, hibiscus)">
+                            <button type="button" class="add-custom-btn" id="add-custom-btn">
+                                ➕ Add
+                            </button>
+                        </div>
+
+                        <!-- Clear All Button -->
+                        <button type="button" class="clear-all-btn" id="clear-all-ingredients">
+                            🗑️ Clear All Ingredients
+                        </button>
+                    </div>
+
+                    <!-- Mood Selection -->
+                    <div class="form-group">
+                        <label>😌 What's Your Mood?</label>
+                        <div class="mood-container">
+                            <div class="mood-option" data-mood="relaxed">
+                                <div class="mood-emoji">😌</div>
+                                <div class="mood-name">Relaxed</div>
+                            </div>
+                            <div class="mood-option" data-mood="party">
+                                <div class="mood-emoji">🎉</div>
+                                <div class="mood-name">Party</div>
+                            </div>
+                            <div class="mood-option" data-mood="romantic">
+                                <div class="mood-emoji">💘</div>
+                                <div class="mood-name">Romantic</div>
+                            </div>
+                            <div class="mood-option" data-mood="sad">
+                                <div class="mood-emoji">😞</div>
+                                <div class="mood-name">Comfort</div>
+                            </div>
+                            <div class="mood-option" data-mood="stress">
+                                <div class="mood-emoji">😵</div>
+                                <div class="mood-name">Stress Relief</div>
+                            </div>
+                            <div class="mood-option" data-mood="energetic">
+                                <div class="mood-emoji">⚡</div>
+                                <div class="mood-name">Energetic</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drink Type Selection -->
+                    <div class="form-group">
+                        <label>🍹 Drink Type</label>
+                        <div class="drink-type-container">
+                            <div class="drink-type-option" data-type="cocktail">
+                                🍸 Cocktail
+                            </div>
+                            <div class="drink-type-option" data-type="mocktail">
+                                🥤 Mocktail
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Generate Button -->
+                    <button type="submit" class="generate-btn" id="generate-btn">
+                        ✨ Generate My Perfect Drink
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Section - Output -->
+            <div class="output-section">
+                <div class="output-placeholder" id="output-placeholder">
+                    <div class="icon">🍹</div>
+                    <h3>Ready to Mix?</h3>
+                    <p>Select your ingredients, mood, and drink type, then click "Generate" to discover your perfect drink recipe!</p>
+                </div>
+
+                <div class="recipe-container" id="recipe-container">
+                    <!-- Recipe content will be dynamically generated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favorites Panel -->
+    <div class="overlay-panel" id="favorites-panel">
+        <div class="panel-content">
+            <div class="panel-header">
+                <h2>❤️ My Favorite Recipes</h2>
+                <button class="close-btn" onclick="drinkMixer.closeFavorites()">✕</button>
+            </div>
+            <div class="panel-body" id="favorites-list">
+                <div class="empty-state">
+                    <div class="empty-icon">💔</div>
+                    <h3>No favorites yet!</h3>
+                    <p>Create some amazing drinks and add them to your favorites</p>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="panel-action-btn clear-btn" onclick="drinkMixer.clearFavorites()">
+                    🗑️ Clear All Favorites
+                </button>
+                <button class="panel-action-btn export-btn" onclick="drinkMixer.exportFavorites()">
+                    📤 Export Favorites
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Panel -->
+    <div class="overlay-panel" id="history-panel">
+        <div class="panel-content">
+            <div class="panel-header">
+                <h2>📚 Recipe History</h2>
+                <button class="close-btn" onclick="drinkMixer.closeHistory()">✕</button>
+            </div>
+            <div class="panel-body" id="history-list">
+                <div class="empty-state">
+                    <div class="empty-icon">📖</div>
+                    <h3>No history yet!</h3>
+                    <p>Start creating drinks to build your recipe history</p>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="panel-action-btn clear-btn" onclick="drinkMixer.clearHistory()">
+                    🗑️ Clear History
+                </button>
+                <button class="panel-action-btn filter-btn" onclick="drinkMixer.toggleHistoryFilter()">
+                    🔍 Filter History
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recipe Detail Modal -->
+    <div class="recipe-modal" id="recipe-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-recipe-name">Recipe Details</h2>
+                <button class="close-btn" onclick="drinkMixer.closeModal()">✕</button>
+            </div>
+            <div class="modal-body" id="modal-recipe-content">
+                <!-- Recipe details will be populated here -->
+            </div>
+            <div class="modal-footer">
+                <button class="modal-action-btn recreate-btn" onclick="drinkMixer.recreateRecipe()">
+                    🔄 Recreate Recipe
+                </button>
+                <button class="modal-action-btn favorite-btn" id="modal-favorite-btn" onclick="drinkMixer.toggleModalFavorite()">
+                    ❤️ Add to Favorites
+                </button>
+                <button class="modal-action-btn print-btn" onclick="drinkMixer.printModalRecipe()">
+                    🖨️ Print Recipe
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
